@@ -24,7 +24,7 @@ export class UserdataService {
   url = 'http://localhost:3000/Users/';
   constructor(private http:HttpClient){}
   createUser(data:any){
-    return this.http.post(this.url,data)
+    return this.http.post(this.url, data)
   }
   getAllusers(){
     return this.http.get(this.url);
@@ -36,8 +36,7 @@ export class UserdataService {
   }
 
   deletUserdata(user:any){
-    console.log("this.url",this.url)
-    console.log("user.id",user.id)
+  
     return this.http.delete(this.url + user.id);
 
   }

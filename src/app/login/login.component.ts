@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserdataService } from '../services/userdata.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -28,15 +29,13 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
-  constructor(private userData: UserdataService) {
-    this.userData.getAllusers().subscribe((data) => {
-      this.userrs = data;
-    })
+  constructor(private userData: UserdataService, private modalService:NgbModal) {
+    
   }
 
   postData(data: any) {
     console.log("data", data);
-    this.userData.createUser(data).subscribe((responce) => {
+    this.userData.createUser(data).subscribe((res) => {
 
       this.getpostDta()
       this.alert = true;
@@ -70,18 +69,22 @@ export class LoginComponent implements OnInit {
     })
   }
 
-
-
-
-
   ngOnInit(): void {
+
     this.getpostDta()
-    this.userData.getAllusers().subscribe((res) => {
-      this.obj = res
-    })
-
+    
+  
   }
-
+  openModal(targetModal:any) {
+    this.modalService.open(targetModal,{
+      centered:true
+    })
+     
+    };
+  
+    onSubmit(){
+      this.modalService.dismissAll();
+    }
 
 }
 
